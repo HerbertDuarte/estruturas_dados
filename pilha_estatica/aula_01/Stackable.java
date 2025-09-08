@@ -1,12 +1,16 @@
 package pilha_estatica.aula_01;
 
-public interface Stackable {
+public interface Stackable<T> {
 
-    public void push(Object item);
+    public void push(T item);
 
-    public Object peek();
+    public T peek();
 
-    public Object pop();
+    public T pop();
+
+    public boolean isEmpty();
+
+    public boolean isFull();
 
     public void print();
 

@@ -1,16 +1,17 @@
 package pilha_estatica.aula_01;
 
-public class StaticStack<T> implements Stackable<T> {
+public class StaticInverseStack<T> implements Stackable<T> {
 
     private T[] data;
-    private int pointerTop = -1;
+    private int pointerTop;
     private int length;
 
-    public StaticStack(int length) {
+    public StaticInverseStack(int length) {
         if (length <= 0) {
             throw new RuntimeException("Invalid value");
         }
         this.length = length;
+        this.pointerTop = length;
         data = (T[]) new Object[length];
     }
 
@@ -21,7 +22,7 @@ public class StaticStack<T> implements Stackable<T> {
             throw new RuntimeException("Stack is full");
         }
 
-        pointerTop++;
+        pointerTop--;
         data[pointerTop] = item;
     }
 
@@ -32,7 +33,7 @@ public class StaticStack<T> implements Stackable<T> {
         }
 
         T item = data[pointerTop];
-        pointerTop--;
+        pointerTop++;
         return item;
     }
 
@@ -46,18 +47,15 @@ public class StaticStack<T> implements Stackable<T> {
         return item;
     }
 
-    @Override
     public boolean isEmpty() {
-        return pointerTop == -1;
+        return pointerTop == length;
     }
 
-    @Override
     public boolean isFull() {
 
-        return pointerTop + 1 == length;
+        return pointerTop == 0;
     }
 
-    @Override
     public void print() {
         String str = "";
 
@@ -66,9 +64,9 @@ public class StaticStack<T> implements Stackable<T> {
             return;
         }
 
-        for (Object object : data) {
+        for (T item : data) {
             str += ",";
-            str += object.toString();
+            str += item.toString();
         }
 
         str = str.substring(1);
